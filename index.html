@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Italian Learning Hub — Milan Edition</title>
+  <meta name="description" content="وب‌اپ یادگیری حرفه‌ای زبان ایتالیایی برای زندگی روزمره در میلان — جستجو، تلفظ، فلش‌کارت، آزمون، علاقه‌مندی‌ها و برنامه ۷ روزه." />
+  <style>
+    :root{
+      --bg:#07111a;
+      --bg2:#0c1724;
+      --card:rgba(255,255,255,.06);
+      --card-strong:rgba(255,255,255,.09);
+      --stroke:rgba(255,255,255,.12);
+      --text:#eaf3f7;
+      --muted:#9db0bd;
+      --emerald:#13c38b;
+      --emerald-2:#10a978;
+      --gold:#d7b56d;
+      --danger:#ff6b6b;
+      --shadow:0 12px 30px rgba(0,0,0,.28);
+      --radius:22px;
+      --radius-sm:14px;
+      --max:1320px;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(circle at top right, rgba(19,195,139,.13), transparent 30%),
+        radial-gradient(circle at top left, rgba(215,181,109,.08), transparent 25%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
+      color:var(--text);
+      font-family: Inter, "Segoe UI", Tahoma, Arial, sans-serif;
+      min-height:100%;
+      scroll-behavior:smooth;
+    }
+    a{color:inherit;text-decoration:none}
+    button,input,select{
+      font:inherit;
+    }
+    .container{
+      width:min(calc(100% - 24px), var(--max));
+      margin-inline:auto;
+    }
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(16px);
+      background:rgba(7,17,26,.72);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      min-height:78px;
+      padding:12px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .logo{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--emerald),#0e7f62);
+      color:#04110e;
+      font-weight:800;
+      box-shadow:var(--shadow);
+    }
+    .brand-title{
+      line-height:1.1;
+    }
+    .brand-title h1{
+      margin:0;
+      font-size:1.08rem;
+      letter-spacing:.2px;
+      font-weight:800;
+    }
+    .brand-title p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:.86rem;
+    }
+    .nav-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      border-radius:14px;
+      padding:12px 16px;
+      background:var(--card);
+      color:var(--text);
+      border:1px solid var(--stroke);
+      transition:.22s ease;
+      box-shadow:none;
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+      background:var(--card-strong);
+    }
+    .btn.primary{
+      background:linear-gradient(135deg,var(--emerald),var(--emerald-2));
+      color:#04110e;
+      font-weight:800;
+      border:none;
+    }
+    .btn.gold{
+      background:linear-gradient(135deg,var(--gold),#b89445);
+      color:#18120a;
+      font-weight:800;
+      border:none;
+    }
+    .hero{
+      padding:34px 0 18px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+    }
+    .panel{
+      background:var(--card);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-main{
+      padding:24px;
+      min-height:260px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:.82rem;
+      color:var(--gold);
+      margin-bottom:12px;
+    }
+    .eyebrow .dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--emerald);
+      box-shadow:0 0 0 6px rgba(19,195,139,.12);
+    }
+    .hero h2{
+      margin:0;
+      font-size:clamp(1.6rem,3vw,2.6rem);
+      line-height:1.12;
+    }
+    .hero p{
+      margin:14px 0 0;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:1rem;
+    }
+    .hero-side{
+      padding:20px;
+      display:grid;
+      gap:12px;
+      align-content:start;
+    }
+    .stat-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+    .stat{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.09);
+    }
+    .stat h3{
+      margin:0;
+      font-size:1.25rem;
+      color:var(--emerald);
+    }
+    .stat p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:.88rem;
+    }
+    .main{
+      padding:20px 0 52px;
+    }
+    .search-wrap{
+      padding:18px;
+      margin-bottom:18px;
+    }
+    .search-grid{
+      display:grid;
+      grid-template-columns:1.6fr .9fr .9fr auto auto;
+      gap:12px;
+    }
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .field label{
+      color:var(--muted);
+      font-size:.86rem;
+    }
+    .input, .select{
+      width:100%;
+      min-height:48px;
+      border-radius:14px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:0 14px;
+      outline:none;
+    }
+    .input::placeholder{
+      color:#7f95a4;
+    }
+    .results-layout{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+    }
+    .results-panel, .sidebar{
+      padding:18px;
+    }
+    .section-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+    .section-title h3{
+      margin:0;
+      font-size:1.04rem;
+    }
+    .section-title p{
+      margin:0;
+      color:var(--muted);
+      font-size:.85rem;
+    }
+    .cards{
+      display:grid;
+      gap:14px;
+    }
+    .word-card{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.04);
+      border-radius:20px;
+      padding:18px;
+      transition:.2s ease;
+    }
+    .word-card:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.055);
+    }
+    .word-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:start;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .word-main{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .italian{
+      font-size:1.38rem;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .pron{
+      color:var(--gold);
+      font-size:.92rem;
+      direction:ltr;
+      text-align:left;
+    }
+    .persian{
+      color:var(--text);
+      font-size:1rem;
+      font-weight:600;
+    }
+    .chips{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:10px 0 0;
+    }
+    .chip{
+      padding:7px 11px;
+      border-radius:999px;
+      background:rgba(19,195,139,.12);
+      border:1px solid rgba(19,195,139,.24);
+      color:#bff3e3;
+      font-size:.8rem;
+    }
+    .chip.level{
+      background:rgba(215,181,109,.12);
+      border-color:rgba(215,181,109,.26);
+      color:#f0dcaa;
+    }
+    .example{
+      margin-top:14px;
+      padding-top:14px;
+      border-top:1px dashed rgba(255,255,255,.1);
+      display:grid;
+      gap:6px;
+    }
+    .example .it{
+      font-weight:600;
+    }
+    .example .fa{
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .icon-btn{
+      border:none;
+      cursor:pointer;
+      min-height:42px;
+      padding:10px 14px;
+      border-radius:12px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+      color:var(--text);
+      transition:.2s ease;
+    }
+    .icon-btn:hover{
+      background:rgba(255,255,255,.1);
+    }
+    .sidebar-grid{
+      display:grid;
+      gap:18px;
+    }
+    .mini-panel{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .mini-panel h4{
+      margin:0 0 10px;
+      font-size:1rem;
+    }
+    .mini-panel p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:.92rem;
+    }
+    .mini-list{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .mini-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .mini-item small{
+      color:var(--muted);
+    }
+    .flashcard-wrap{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+    .flashcard-panel, .quiz-panel{
+      padding:18px;
+    }
+    .flashcard{
+      min-height:230px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:24px;
+      border-radius:22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid var(--stroke);
+      cursor:pointer;
+      user-select:none;
+      transition:.28s ease;
+    }
+    .flashcard:hover{
+      transform:translateY(-2px);
+    }
+    .flashcard .big{
+      font-size:clamp(1.5rem,3vw,2.3rem);
+      font-weight:800;
+    }
+    .flashcard .sub{
+      margin-top:10px;
+      color:var(--muted);
+    }
+    .toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .quiz-box{
+      display:grid;
+      gap:14px;
+    }
+    .question{
+      padding:18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--stroke);
+    }
+    .question h4{
+      margin:0 0 6px;
+      font-size:1.15rem;
+    }
+    .options{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .option{
+      text-align:right;
+      border:none;
+      cursor:pointer;
+      padding:13px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      border:1px solid var(--stroke);
+      transition:.2s ease;
+    }
+    .option:hover{
+      background:rgba(255,255,255,.08);
+    }
+    .option.correct{
+      background:rgba(19,195,139,.14);
+      border-color:rgba(19,195,139,.38);
+    }
+    .option.wrong{
+      background:rgba(255,107,107,.13);
+      border-color:rgba(255,107,107,.32);
+    }
+    .muted{
+      color:var(--muted);
+    }
+    .empty{
+      padding:28px 18px;
+      text-align:center;
+      color:var(--muted);
+      border:1px dashed rgba(255,255,255,.14);
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+    }
+    .footer{
+      padding:28px 0 45px;
+      color:var(--muted);
+      text-align:center;
+      font-size:.9rem;
+    }
+    .pill-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .pill{
+      cursor:pointer;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--stroke);
+      color:var(--text);
+      transition:.2s ease;
+      font-size:.9rem;
+    }
+    .pill.active{
+      background:rgba(19,195,139,.15);
+      border-color:rgba(19,195,139,.38);
+      color:#c8f8e9;
+    }
+
+    @media (max-width: 1100px){
+      .hero-grid,
+      .results-layout,
+      .flashcard-wrap{
+        grid-template-columns:1fr;
+      }
+      .search-grid{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+    @media (max-width: 720px){
+      .topbar-inner{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .nav-actions{
+        justify-content:stretch;
+      }
+      .nav-actions .btn{
+        flex:1 1 calc(50% - 10px);
+      }
+      .search-grid{
+        grid-template-columns:1fr;
+      }
+      .stat-grid{
+        grid-template-columns:1fr 1fr;
+      }
+      .word-top{
+        flex-direction:column;
+      }
+      .actions .icon-btn{
+        flex:1 1 calc(50% - 10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="logo">IT</div>
+        <div class="brand-title">
+          <h1>Italian Learning Hub</h1>
+          <p>Milan Daily Survival • Persian Friendly • Offline Ready</p>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <button class="btn" onclick="scrollToSection('dictionarySection')">Dictionary</button>
+        <button class="btn" onclick="scrollToSection('flashcardSection')">Flashcards</button>
+        <button class="btn" onclick="scrollToSection('quizSection')">Quiz</button>
+        <button class="btn gold" onclick="exportFavorites()">Export Favorites</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="panel hero-main">
+        <div class="eyebrow"><span class="dot"></span> Milan-Ready Italian</div>
+        <h2>یادگیری حرفه‌ای زبان ایتالیایی برای زندگی روزمره در میلان</h2>
+        <p>
+          این وب‌اپ برای یادگیری سریع، کاربردی و اصولی طراحی شده: جست‌وجوی فارسی به ایتالیایی،
+          تلفظ انگلیسی، مثال واقعی، علاقه‌مندی‌ها، فلش‌کارت، آزمون و برنامه‌ی تمرین.
+        </p>
+        <div class="pill-row" id="quickCategories"></div>
+      </div>
+      <div class="panel hero-side">
+        <div class="stat-grid">
+          <div class="stat">
+            <h3 id="statWords">0</h3>
+            <p>واژه و عبارت</p>
+          </div>
+          <div class="stat">
+            <h3 id="statFavs">0</h3>
+            <p>علاقه‌مندی‌ها</p>
+          </div>
+          <div class="stat">
+            <h3 id="statHistory">0</h3>
+            <p>تاریخچه جستجو</p>
+          </div>
+          <div class="stat">
+            <h3>7 روز</h3>
+            <p>پلن شروع سریع</p>
+          </div>
+        </div>
+        <div class="mini-panel">
+          <h4>روش استفاده پیشنهادی</h4>
+          <p>
+            هر روز یک دسته را انتخاب کنید، 20 واژه را ذخیره کنید، تلفظ را گوش دهید،
+            با فلش‌کارت تمرین کنید و در پایان با Quiz خودتان را بسنجید.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main">
+    <div class="container">
+      <section id="dictionarySection" class="panel search-wrap">
+        <div class="section-title">
+          <div>
+            <h3>جست‌وجوی هوشمند واژه‌ها</h3>
+            <p>فارسی، ایتالیایی یا تلفظ انگلیسی را وارد کنید</p>
+          </div>
+        </div>
+
+        <div class="search-grid">
+          <div class="field">
+            <label for="searchInput">Search</label>
+            <input id="searchInput" class="input" type="text" placeholder="مثلاً: آب / bagno / CHEE-ao" />
+          </div>
+
+          <div class="field">
+            <label for="categoryFilter">Category</label>
+            <select id="categoryFilter" class="select">
+              <option value="all">همه دسته‌ها</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="levelFilter">Level</label>
+            <select id="levelFilter" class="select">
+              <option value="all">همه سطوح</option>
+              <option value="A1">A1</option>
+              <option value="A2">A2</option>
+              <option value="B1">B1</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>&nbsp;</label>
+            <button class="btn primary" onclick="performSearch()">جستجو</button>
+          </div>
+
+          <div class="field">
+            <label>&nbsp;</label>
+            <button class="btn" onclick="resetFilters()">ریست</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-layout">
+        <div class="panel results-panel">
+          <div class="section-title">
+            <div>
+              <h3>نتایج</h3>
+              <p id="resultCount">0 نتیجه</p>
+            </div>
+          </div>
+          <div id="results" class="cards"></div>
+        </div>
+
+        <aside class="panel sidebar">
+          <div class="sidebar-grid">
+            <div class="mini-panel">
+              <h4>دسته‌بندی‌ها</h4>
+              <div id="categoryPills" class="pill-row"></div>
+            </div>
+
+            <div class="mini-panel">
+              <h4>علاقه‌مندی‌ها</h4>
+              <div id="favoritesList" class="mini-list"></div>
+            </div>
+
+            <div class="mini-panel">
+              <h4>تاریخچه جستجو</h4>
+              <div id="historyList" class="mini-list"></div>
+            </div>
+
+            <div class="mini-panel">
+              <h4>برنامه ۷ روزه</h4>
+              <p>
+                روز 1: سلام و احوال‌پرسی<br>
+                روز 2: کافه و رستوران<br>
+                روز 3: حمل‌ونقل شهری<br>
+                روز 4: خرید و پرداخت<br>
+                روز 5: خانه و خدمات<br>
+                روز 6: کار و اداری<br>
+                روز 7: مرور + فلش‌کارت + آزمون
+              </p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="flashcardSection" class="flashcard-wrap">
+        <div class="panel flashcard-panel">
+          <div class="section-title">
+            <div>
+              <h3>Flashcards</h3>
+              <p>برای برگرداندن کارت روی آن کلیک کنید</p>
+            </div>
+          </div>
+          <div id="flashcard" class="flashcard" onclick="flipFlashcard()">
+            <div>
+              <div class="big" id="flashcardFront">Ciao</div>
+              <div class="sub" id="flashcardSub">برای شروع روی Next بزنید</div>
+            </div>
+          </div>
+          <div class="toolbar">
+            <button class="btn primary" onclick="nextFlashcard()">Next</button>
+            <button class="btn" onclick="speakCurrentFlashcard()">Speak</button>
+            <button class="btn" onclick="addCurrentFlashcardToFavorites()">Favorite</button>
+          </div>
+        </div>
+
+        <div id="quizSection" class="panel quiz-panel">
+          <div class="section-title">
+            <div>
+              <h3>Quiz</h3>
+              <p>معنی درست را انتخاب کنید</p>
+            </div>
+          </div>
+          <div class="quiz-box">
+            <div class="question">
+              <h4 id="quizWord">Pronto</h4>
+              <div class="muted">کدام ترجمه صحیح است؟</div>
+              <div id="quizOptions" class="options"></div>
+            </div>
+            <div class="toolbar">
+              <button class="btn primary" onclick="generateQuiz()">New Question</button>
+            </div>
+            <div class="muted" id="quizFeedback"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    Built as a single-file HTML app for GitHub Pages • Offline-first • Persian-friendly Italian learning
+  </footer>
+
+  <script>
+    const dictionary = [
+      { italian:"ciao", persian:"سلام / خداحافظ", aliases:["سلام","خداحافظ","درود"], pronunciation:"CHOW", category:"greetings", example:"Ciao, come stai?", exampleFa:"سلام، حالت چطوره؟", level:"A1" },
+      { italian:"buongiorno", persian:"صبح بخیر / روز بخیر", aliases:["روز بخیر","صبح بخیر"], pronunciation:"bwon-JOR-no", category:"greetings", example:"Buongiorno, signora.", exampleFa:"روز بخیر خانم.", level:"A1" },
+      { italian:"buonasera", persian:"عصر بخیر", aliases:["عصر بخیر","شب بخیر رسمی"], pronunciation:"bwona-SE-ra", category:"greetings", example:"Buonasera a tutti.", exampleFa:"عصر بخیر به همه.", level:"A1" },
+      { italian:"arrivederci", persian:"خداحافظ رسمی", aliases:["خداحافظ رسمی","بدرود"], pronunciation:"ar-ree-ve-DER-chee", category:"greetings", example:"Arrivederci e grazie.", exampleFa:"خداحافظ و ممنون.", level:"A1" },
+      { italian:"per favore", persian:"لطفاً", aliases:["لطفا","خواهشاً"], pronunciation:"per fa-VO-re", category:"greetings", example:"Un caffè, per favore.", exampleFa:"یک قهوه لطفاً.", level:"A1" },
+      { italian:"grazie", persian:"ممنون", aliases:["مرسی","ممنون","سپاس"], pronunciation:"GRA-tsye", category:"greetings", example:"Grazie mille.", exampleFa:"خیلی ممنون.", level:"A1" },
+      { italian:"prego", persian:"خواهش می‌کنم / بفرمایید", aliases:["خواهش میکنم","بفرمایید"], pronunciation:"PRE-go", category:"greetings", example:"Grazie — Prego.", exampleFa:"ممنون — خواهش می‌کنم.", level:"A1" },
+      { italian:"scusa", persian:"ببخشید", aliases:["ببخشید","معذرت"], pronunciation:"SKOO-za", category:"greetings", example:"Scusa, dov'è la stazione?", exampleFa:"ببخشید، ایستگاه کجاست؟", level:"A1" },
+      { italian:"mi dispiace", persian:"متأسفم", aliases:["متاسفم","بابتش متاسفم"], pronunciation:"mee dee-SPYA-che", category:"greetings", example:"Mi dispiace per il ritardo.", exampleFa:"برای تأخیر متأسفم.", level:"A2" },
+      { italian:"come stai?", persian:"حالت چطور است؟", aliases:["حالت چطوره","چطوری"], pronunciation:"KO-me STAI", category:"greetings", example:"Ciao, come stai?", exampleFa:"سلام، حالت چطوره؟", level:"A1" },
+
+      { italian:"acqua", persian:"آب", aliases:["آب"], pronunciation:"AK-kwa", category:"restaurant", example:"Vorrei dell'acqua naturale.", exampleFa:"آب معمولی می‌خواهم.", level:"A1" },
+      { italian:"caffè", persian:"قهوه", aliases:["قهوه"], pronunciation:"kaf-FEH", category:"restaurant", example:"Un caffè, per favore.", exampleFa:"یک قهوه لطفاً.", level:"A1" },
+      { italian:"colazione", persian:"صبحانه", aliases:["صبحانه"], pronunciation:"ko-la-tsyo-NE", category:"restaurant", example:"Faccio colazione alle sette.", exampleFa:"من ساعت هفت صبحانه می‌خورم.", level:"A1" },
+      { italian:"pranzo", persian:"ناهار", aliases:["ناهار"], pronunciation:"PRAN-tso", category:"restaurant", example:"A che ora è il pranzo?", exampleFa:"ناهار چه ساعتی است؟", level:"A1" },
+      { italian:"cena", persian:"شام", aliases:["شام"], pronunciation:"CHE-na", category:"restaurant", example:"La cena è pronta.", exampleFa:"شام آماده است.", level:"A1" },
+      { italian:"menu", persian:"منو", aliases:["منو","فهرست غذا"], pronunciation:"meh-NOO", category:"restaurant", example:"Posso vedere il menu?", exampleFa:"می‌توانم منو را ببینم؟", level:"A1" },
+      { italian:"conto", persian:"صورتحساب", aliases:["صورتحساب","حساب"], pronunciation:"KON-to", category:"restaurant", example:"Il conto, per favore.", exampleFa:"صورتحساب لطفاً.", level:"A1" },
+      { italian:"vino", persian:"شراب", aliases:["شراب"], pronunciation:"VEE-no", category:"restaurant", example:"Un bicchiere di vino rosso.", exampleFa:"یک لیوان شراب قرمز.", level:"A2" },
+      { italian:"pane", persian:"نان", aliases:["نان"], pronunciation:"PA-ne", category:"restaurant", example:"Vorrei del pane.", exampleFa:"کمی نان می‌خواهم.", level:"A1" },
+      { italian:"formaggio", persian:"پنیر", aliases:["پنیر"], pronunciation:"for-MAJ-jo", category:"restaurant", example:"Mi piace il formaggio.", exampleFa:"من پنیر دوست دارم.", level:"A1" },
+
+      { italian:"stazione", persian:"ایستگاه", aliases:["ایستگاه"], pronunciation:"sta-TSYO-ne", category:"transport", example:"Dov'è la stazione?", exampleFa:"ایستگاه کجاست؟", level:"A1" },
+      { italian:"treno", persian:"قطار", aliases:["قطار"], pronunciation:"TRE-no", category:"transport", example:"Il treno parte alle nove.", exampleFa:"قطار ساعت نه حرکت می‌کند.", level:"A1" },
+      { italian:"metro", persian:"مترو", aliases:["مترو"], pronunciation:"ME-tro", category:"transport", example:"Prendo la metro.", exampleFa:"من مترو سوار می‌شوم.", level:"A1" },
+      { italian:"autobus", persian:"اتوبوس", aliases:["اتوبوس","باس"], pronunciation:"OW-to-bus", category:"transport", example:"Dove passa l'autobus?", exampleFa:"اتوبوس از کجا رد می‌شود؟", level:"A1" },
+      { italian:"biglietto", persian:"بلیط", aliases:["بلیط","تیکت"], pronunciation:"bee-LYET-to", category:"transport", example:"Vorrei un biglietto.", exampleFa:"یک بلیط می‌خواهم.", level:"A1" },
+      { italian:"aeroporto", persian:"فرودگاه", aliases:["فرودگاه"], pronunciation:"a-e-ro-POR-to", category:"transport", example:"Quanto costa andare all'aeroporto?", exampleFa:"رفتن به فرودگاه چقدر هزینه دارد؟", level:"A2" },
+      { italian:"taxi", persian:"تاکسی", aliases:["تاکسی"], pronunciation:"TAK-see", category:"transport", example:"Mi serve un taxi.", exampleFa:"من به یک تاکسی نیاز دارم.", level:"A1" },
+      { italian:"destra", persian:"راست", aliases:["راست","سمت راست"], pronunciation:"DES-tra", category:"transport", example:"Gira a destra.", exampleFa:"به راست بپیچ.", level:"A1" },
+      { italian:"sinistra", persian:"چپ", aliases:["چپ","سمت چپ"], pronunciation:"see-NEES-tra", category:"transport", example:"La banca è a sinistra.", exampleFa:"بانک در سمت چپ است.", level:"A1" },
+      { italian:"vicino", persian:"نزدیک", aliases:["نزدیک","اطراف"], pronunciation:"vee-CHEE-no", category:"transport", example:"È vicino?", exampleFa:"نزدیک است؟", level:"A1" },
+
+      { italian:"prezzo", persian:"قیمت", aliases:["قیمت","نرخ"], pronunciation:"PRET-tso", category:"shopping", example:"Qual è il prezzo?", exampleFa:"قیمت چقدر است؟", level:"A1" },
+      { italian:"sconto", persian:"تخفیف", aliases:["تخفیف"], pronunciation:"SKON-to", category:"shopping", example:"C'è uno sconto?", exampleFa:"تخفیف دارد؟", level:"A2" },
+      { italian:"carta", persian:"کارت", aliases:["کارت بانکی","کارت"], pronunciation:"KAR-ta", category:"shopping", example:"Posso pagare con carta?", exampleFa:"می‌توانم با کارت پرداخت کنم؟", level:"A1" },
+      { italian:"contanti", persian:"نقدی", aliases:["نقدی","پول نقد"], pronunciation:"kon-TAN-tee", category:"shopping", example:"Accettate contanti?", exampleFa:"پول نقد قبول می‌کنید؟", level:"A2" },
+      { italian:"negozio", persian:"فروشگاه", aliases:["فروشگاه","مغازه"], pronunciation:"ne-GOT-tsyo", category:"shopping", example:"Cerco un negozio di vestiti.", exampleFa:"دنبال یک فروشگاه لباس هستم.", level:"A1" },
+      { italian:"taglia", persian:"سایز", aliases:["سایز","اندازه"], pronunciation:"TA-lya", category:"shopping", example:"Che taglia porti?", exampleFa:"چه سایزی می‌پوشی؟", level:"A1" },
+      { italian:"provare", persian:"امتحان کردن / پرو کردن", aliases:["پرو کردن","امتحان کردن"], pronunciation:"pro-VA-re", category:"shopping", example:"Posso provarlo?", exampleFa:"می‌توانم آن را پرو کنم؟", level:"A1" },
+      { italian:"aperto", persian:"باز", aliases:["باز"], pronunciation:"a-PER-to", category:"shopping", example:"Il supermercato è aperto?", exampleFa:"سوپرمارکت باز است؟", level:"A1" },
+      { italian:"chiuso", persian:"بسته", aliases:["بسته"], pronunciation:"KYOO-zo", category:"shopping", example:"Oggi è chiuso.", exampleFa:"امروز بسته است.", level:"A1" },
+      { italian:"mercato", persian:"بازار", aliases:["بازار"], pronunciation:"mer-KA-to", category:"shopping", example:"Il mercato è molto grande.", exampleFa:"بازار خیلی بزرگ است.", level:"A1" },
+
+      { italian:"casa", persian:"خانه", aliases:["خانه","منزل"], pronunciation:"KA-za", category:"home", example:"Vado a casa.", exampleFa:"من به خانه می‌روم.", level:"A1" },
+      { italian:"stanza", persian:"اتاق", aliases:["اتاق"], pronunciation:"STAN-tsa", category:"home", example:"La stanza è piccola.", exampleFa:"اتاق کوچک است.", level:"A1" },
+      { italian:"bagno", persian:"سرویس بهداشتی / حمام", aliases:["دستشویی","توالت","سرویس بهداشتی","حمام"], pronunciation:"BAN-nyo", category:"home", example:"Dov'è il bagno?", exampleFa:"سرویس بهداشتی کجاست؟", level:"A1" },
+      { italian:"cucina", persian:"آشپزخانه", aliases:["آشپزخانه"], pronunciation:"koo-CHEE-na", category:"home", example:"La cucina è nuova.", exampleFa:"آشپزخانه جدید است.", level:"A1" },
+      { italian:"letto", persian:"تخت", aliases:["تخت"], pronunciation:"LET-to", category:"home", example:"Il letto è comodo.", exampleFa:"تخت راحت است.", level:"A1" },
+      { italian:"chiave", persian:"کلید", aliases:["کلید"], pronunciation:"KYA-ve", category:"home", example:"Ho perso la chiave.", exampleFa:"کلید را گم کرده‌ام.", level:"A2" },
+      { italian:"porta", persian:"در", aliases:["در"], pronunciation:"POR-ta", category:"home", example:"Chiudi la porta, per favore.", exampleFa:"لطفاً در را ببند.", level:"A1" },
+      { italian:"finestra", persian:"پنجره", aliases:["پنجره"], pronunciation:"fee-NES-tra", category:"home", example:"Apri la finestra.", exampleFa:"پنجره را باز کن.", level:"A1" },
+      { italian:"affitto", persian:"اجاره", aliases:["اجاره"], pronunciation:"af-FIT-to", category:"home", example:"Quanto costa l'affitto?", exampleFa:"اجاره چقدر است؟", level:"A2" },
+      { italian:"bolletta", persian:"قبض", aliases:["قبض"], pronunciation:"bol-LET-ta", category:"home", example:"Devo pagare la bolletta.", exampleFa:"باید قبض را پرداخت کنم.", level:"A2" },
+
+      { italian:"lavoro", persian:"کار", aliases:["کار","شغل"], pronunciation:"la-VO-ro", category:"work", example:"Cerco lavoro a Milano.", exampleFa:"من در میلان دنبال کار می‌گردم.", level:"A1" },
+      { italian:"ufficio", persian:"دفتر", aliases:["دفتر","اداره"], pronunciation:"oo-FEE-cho", category:"work", example:"Sono in ufficio.", exampleFa:"من در دفتر هستم.", level:"A1" },
+      { italian:"collega", persian:"همکار", aliases:["همکار"], pronunciation:"kol-LE-ga", category:"work", example:"Il mio collega è gentile.", exampleFa:"همکارم مهربان است.", level:"A2" },
+      { italian:"riunione", persian:"جلسه", aliases:["جلسه"], pronunciation:"ryoo-NYO-ne", category:"work", example:"Ho una riunione domani.", exampleFa:"من فردا جلسه دارم.", level:"A2" },
+      { italian:"contratto", persian:"قرارداد", aliases:["قرارداد"], pronunciation:"kon-TRAT-to", category:"work", example:"Devo firmare il contratto.", exampleFa:"باید قرارداد را امضا کنم.", level:"B1" },
+      { italian:"documento", persian:"مدرک / سند", aliases:["مدرک","سند","دکیومنت"], pronunciation:"do-koo-MEN-to", category:"work", example:"Mi serve un documento.", exampleFa:"من به یک مدرک نیاز دارم.", level:"A2" },
+      { italian:"firma", persian:"امضا", aliases:["امضا"], pronunciation:"FEER-ma", category:"work", example:"Qui la firma, per favore.", exampleFa:"لطفاً اینجا امضا کنید.", level:"A2" },
+      { italian:"permesso", persian:"مجوز", aliases:["مجوز","اجازه"], pronunciation:"per-MES-so", category:"work", example:"Ho bisogno di un permesso.", exampleFa:"من به یک مجوز نیاز دارم.", level:"B1" },
+      { italian:"appuntamento", persian:"قرار ملاقات", aliases:["قرار","وقت ملاقات"], pronunciation:"ap-pun-ta-MEN-to", category:"work", example:"Ho un appuntamento alle dieci.", exampleFa:"من ساعت ده قرار ملاقات دارم.", level:"A2" },
+      { italian:"orario", persian:"برنامه زمانی / ساعت کاری", aliases:["ساعت کاری","زمان‌بندی","برنامه زمانی"], pronunciation:"o-RA-ryo", category:"work", example:"Qual è il tuo orario?", exampleFa:"ساعت کاری تو چیست؟", level:"A2" },
+
+      { italian:"medico", persian:"پزشک", aliases:["دکتر","پزشک"], pronunciation:"ME-dee-ko", category:"health", example:"Ho bisogno di un medico.", exampleFa:"من به پزشک نیاز دارم.", level:"A1" },
+      { italian:"farmacia", persian:"داروخانه", aliases:["داروخانه"], pronunciation:"far-ma-CHEE-a", category:"health", example:"Dov'è la farmacia?", exampleFa:"داروخانه کجاست؟", level:"A1" },
+      { italian:"ospedale", persian:"بیمارستان", aliases:["بیمارستان"], pronunciation:"os-pe-DA-le", category:"health", example:"Portami all'ospedale.", exampleFa:"مرا به بیمارستان ببر.", level:"A2" },
+      { italian:"dolore", persian:"درد", aliases:["درد"], pronunciation:"do-LO-re", category:"health", example:"Ho dolore alla testa.", exampleFa:"من سر درد دارم.", level:"A2" },
+      { italian:"febbre", persian:"تب", aliases:["تب"], pronunciation:"FEB-bre", category:"health", example:"Ho la febbre.", exampleFa:"تب دارم.", level:"A1" },
+      { italian:"testa", persian:"سر", aliases:["سر"], pronunciation:"TES-ta", category:"health", example:"Mi gira la testa.", exampleFa:"سرم گیج می‌رود.", level:"A2" },
+      { italian:"medicina", persian:"دارو", aliases:["دارو","قرص"], pronunciation:"me-dee-CHEE-na", category:"health", example:"Devo prendere la medicina.", exampleFa:"باید دارو را مصرف کنم.", level:"A2" },
+      { italian:"allergia", persian:"آلرژی", aliases:["آلرژی"], pronunciation:"al-ler-JEE-a", category:"health", example:"Ho un'allergia.", exampleFa:"من آلرژی دارم.", level:"A2" },
+      { italian:"emergenza", persian:"اورژانس / وضعیت اضطراری", aliases:["اورژانس","اضطراری"], pronunciation:"e-mer-JEN-tsa", category:"health", example:"È un'emergenza.", exampleFa:"این یک وضعیت اضطراری است.", level:"A2" },
+      { italian:"ambulanza", persian:"آمبولانس", aliases:["آمبولانس"], pronunciation:"am-boo-LAN-tsa", category:"health", example:"Chiama un'ambulanza!", exampleFa:"یک آمبولانس خبر کن!", level:"A2" },
+
+      { italian:"oggi", persian:"امروز", aliases:["امروز"], pronunciation:"OJ-jee", category:"time", example:"Oggi lavoro.", exampleFa:"امروز کار می‌کنم.", level:"A1" },
+      { italian:"domani", persian:"فردا", aliases:["فردا"], pronunciation:"do-MA-nee", category:"time", example:"Parto domani.", exampleFa:"من فردا حرکت می‌کنم.", level:"A1" },
+      { italian:"ieri", persian:"دیروز", aliases:["دیروز"], pronunciation:"YE-ree", category:"time", example:"Ieri ero a casa.", exampleFa:"دیروز خانه بودم.", level:"A1" },
+      { italian:"adesso", persian:"الان", aliases:["الان","اکنون"], pronunciation:"a-DES-so", category:"time", example:"Vengo adesso.", exampleFa:"الان می‌آیم.", level:"A1" },
+      { italian:"subito", persian:"فوراً", aliases:["فورا","بلافاصله"], pronunciation:"SOO-bee-to", category:"time", example:"Arrivo subito.", exampleFa:"فوراً می‌رسم.", level:"A1" },
+      { italian:"mattina", persian:"صبح", aliases:["صبح"], pronunciation:"mat-TEE-na", category:"time", example:"Ci vediamo domani mattina.", exampleFa:"فردا صبح همدیگر را می‌بینیم.", level:"A1" },
+      { italian:"pomeriggio", persian:"بعدازظهر", aliases:["بعدازظهر"], pronunciation:"po-me-REED-jo", category:"time", example:"Nel pomeriggio studio.", exampleFa:"بعدازظهر درس می‌خوانم.", level:"A1" },
+      { italian:"sera", persian:"عصر / شب", aliases:["عصر","شب"], pronunciation:"SE-ra", category:"time", example:"Stasera esco.", exampleFa:"امشب بیرون می‌روم.", level:"A1" },
+      { italian:"settimana", persian:"هفته", aliases:["هفته"], pronunciation:"set-tee-MA-na", category:"time", example:"Lavoro cinque giorni a settimana.", exampleFa:"هفته‌ای پنج روز کار می‌کنم.", level:"A2" },
+      { italian:"mese", persian:"ماه", aliases:["ماه"], pronunciation:"ME-ze", category:"time", example:"Resto qui un mese.", exampleFa:"من یک ماه اینجا می‌مانم.", level:"A2" },
+
+      { italian:"io", persian:"من", aliases:["من"], pronunciation:"EE-o", category:"basics", example:"Io sono pronto.", exampleFa:"من آماده‌ام.", level:"A1" },
+      { italian:"tu", persian:"تو", aliases:["تو"], pronunciation:"TOO", category:"basics", example:"Tu sei gentile.", exampleFa:"تو مهربان هستی.", level:"A1" },
+      { italian:"lui", persian:"او مذکر", aliases:["او","او مذکر"], pronunciation:"LOO-ee", category:"basics", example:"Lui è italiano.", exampleFa:"او ایتالیایی است.", level:"A1" },
+      { italian:"lei", persian:"او مؤنث / شما رسمی", aliases:["او مونث","او مؤنث","شما رسمی"], pronunciation:"LAY", category:"basics", example:"Lei parla inglese?", exampleFa:"آیا شما انگلیسی صحبت می‌کنید؟", level:"A1" },
+      { italian:"noi", persian:"ما", aliases:["ما"], pronunciation:"NOY", category:"basics", example:"Noi viviamo a Milano.", exampleFa:"ما در میلان زندگی می‌کنیم.", level:"A1" },
+      { italian:"voi", persian:"شما", aliases:["شما"], pronunciation:"VOY", category:"basics", example:"Voi siete pronti?", exampleFa:"آیا شما آماده‌اید؟", level:"A1" },
+      { italian:"sono", persian:"هستم / هستند", aliases:["هستم","هستند"], pronunciation:"SO-no", category:"basics", example:"Sono stanco.", exampleFa:"من خسته‌ام.", level:"A1" },
+      { italian:"ho", persian:"دارم", aliases:["دارم"], pronunciation:"OH", category:"basics", example:"Ho fame.", exampleFa:"من گرسنه‌ام.", level:"A1" },
+      { italian:"voglio", persian:"می‌خواهم", aliases:["میخواهم","می‌خواهم"], pronunciation:"VOL-yo", category:"basics", example:"Voglio un caffè.", exampleFa:"من یک قهوه می‌خواهم.", level:"A1" },
+      { italian:"vorrei", persian:"مایلم / می‌خواهم مؤدبانه", aliases:["مایلم","می‌خواهم مودبانه","می‌خواهم مؤدبانه"], pronunciation:"vor-RAY", category:"basics", example:"Vorrei prenotare una stanza.", exampleFa:"مایلم یک اتاق رزرو کنم.", level:"A1" },
+
+      { italian:"posso", persian:"می‌توانم", aliases:["میتوانم","می‌توانم"], pronunciation:"POS-so", category:"basics", example:"Posso entrare?", exampleFa:"می‌توانم وارد شوم؟", level:"A1" },
+      { italian:"non", persian:"نه / منفی‌ساز", aliases:["نه","نفی"], pronunciation:"NON", category:"basics", example:"Non capisco.", exampleFa:"متوجه نمی‌شوم.", level:"A1" },
+      { italian:"capisco", persian:"می‌فهمم", aliases:["میفهمم","می‌فهمم","متوجه می‌شوم"], pronunciation:"ka-PEE-sko", category:"basics", example:"Non capisco bene.", exampleFa:"خوب متوجه نمی‌شوم.", level:"A1" },
+      { italian:"parla inglese?", persian:"انگلیسی صحبت می‌کنید؟", aliases:["انگلیسی بلدید","انگلیسی صحبت می‌کنید"], pronunciation:"PAR-la een-GLAY-ze", category:"basics", example:"Scusi, parla inglese?", exampleFa:"ببخشید، انگلیسی صحبت می‌کنید؟", level:"A1" },
+      { italian:"aiuto", persian:"کمک", aliases:["کمک"], pronunciation:"a-YOO-to", category:"basics", example:"Aiuto, per favore!", exampleFa:"کمک، لطفاً!", level:"A1" },
+      { italian:"dove", persian:"کجا", aliases:["کجا"], pronunciation:"DO-ve", category:"basics", example:"Dove vivi?", exampleFa:"کجا زندگی می‌کنی؟", level:"A1" },
+      { italian:"quando", persian:"کی", aliases:["کی","چه زمانی"], pronunciation:"KWAN-do", category:"basics", example:"Quando arrivi?", exampleFa:"کی می‌رسی؟", level:"A1" },
+      { italian:"perché", persian:"چرا", aliases:["چرا"], pronunciation:"per-KEH", category:"basics", example:"Perché studi italiano?", exampleFa:"چرا ایتالیایی می‌خوانی؟", level:"A1" },
+      { italian:"quanto", persian:"چقدر", aliases:["چقدر","چه قدر"], pronunciation:"KWAN-to", category:"basics", example:"Quanto costa?", exampleFa:"چقدر هزینه دارد؟", level:"A1" },
+      { italian:"quale", persian:"کدام", aliases:["کدام"], pronunciation:"KWA-le", category:"basics", example:"Quale preferisci?", exampleFa:"کدام را ترجیح می‌دهی؟", level:"A1" },
+
+      { italian:"amico", persian:"دوست", aliases:["دوست","رفیق"], pronunciation:"a-MEE-ko", category:"social", example:"Lui è un mio amico.", exampleFa:"او دوست من است.", level:"A1" },
+      { italian:"famiglia", persian:"خانواده", aliases:["خانواده"], pronunciation:"fa-MEE-lya", category:"social", example:"La mia famiglia è in Iran.", exampleFa:"خانواده من در ایران هستند.", level:"A1" },
+      { italian:"madre", persian:"مادر", aliases:["مادر"], pronunciation:"MA-dre", category:"social", example:"Mia madre sta bene.", exampleFa:"مادرم خوب است.", level:"A1" },
+      { italian:"padre", persian:"پدر", aliases:["پدر"], pronunciation:"PA-dre", category:"social", example:"Mio padre lavora molto.", exampleFa:"پدرم خیلی کار می‌کند.", level:"A1" },
+      { italian:"figlio", persian:"پسر / فرزند", aliases:["پسر","فرزند"], pronunciation:"FEE-lyo", category:"social", example:"Ha un figlio.", exampleFa:"او یک پسر دارد.", level:"A2" },
+      { italian:"figlia", persian:"دختر / فرزند دختر", aliases:["دختر","فرزند دختر"], pronunciation:"FEE-lya", category:"social", example:"Ha una figlia.", exampleFa:"او یک دختر دارد.", level:"A2" },
+      { italian:"ragazzo", persian:"پسر جوان", aliases:["پسر جوان"], pronunciation:"ra-GAT-tso", category:"social", example:"Quel ragazzo è simpatico.", exampleFa:"آن پسر جوان خوش‌برخورد است.", level:"A1" },
+      { italian:"ragazza", persian:"دختر جوان", aliases:["دختر جوان"], pronunciation:"ra-GAT-tsa", category:"social", example:"La ragazza parla italiano.", exampleFa:"آن دختر ایتالیایی صحبت می‌کند.", level:"A1" },
+      { italian:"gentile", persian:"مهربان / مؤدب", aliases:["مهربان","مودب","مؤدب"], pronunciation:"jen-TEE-le", category:"social", example:"Sei molto gentile.", exampleFa:"تو خیلی مهربانی.", level:"A1" },
+      { italian:"piacere", persian:"از آشنایی خوشوقتم", aliases:["خوشوقتم","از آشنایی خوشوقتم"], pronunciation:"pya-CHE-re", category:"social", example:"Piacere di conoscerti.", exampleFa:"از آشنایی با تو خوشوقتم.", level:"A1" }
+    ];
+
+    const categoryLabels = {
+      all:"همه",
+      greetings:"سلام و احوال‌پرسی",
+      restaurant:"رستوران و کافه",
+      transport:"حمل‌ونقل",
+      shopping:"خرید",
+      home:"خانه و زندگی",
+      work:"کار و اداری",
+      health:"سلامت",
+      time:"زمان",
+      basics:"پایه",
+      social:"اجتماعی"
+    };
+
+    let filtered = [...dictionary];
+    let favorites = JSON.parse(localStorage.getItem("it_favorites") || "[]");
+    let history = JSON.parse(localStorage.getItem("it_history") || "[]");
+    let flashcardIndex = 0;
+    let flashcardFlipped = false;
+    let currentQuiz = null;
+
+    function normalizePersian(value){
+      return (value || "")
+        .toString()
+        .trim()
+        .toLowerCase()
+        .replace(/ي/g,"ی")
+        .replace(/ك/g,"ک")
+        .replace(/ة/g,"ه")
+        .replace(/ۀ/g,"ه")
+        .replace(/ؤ/g,"و")
+        .replace(/إ|أ/g,"ا")
+        .replace(/‌/g," ")
+        .replace(/\s+/g," ");
+    }
+
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, m => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[m]));
+    }
+
+    function saveFavorites(){
+      localStorage.setItem("it_favorites", JSON.stringify(favorites));
+      updateStats();
+      renderFavorites();
+    }
+
+    function saveHistory(){
+      localStorage.setItem("it_history", JSON.stringify(history.slice(0,15)));
+      updateStats();
+      renderHistory();
+    }
+
+    function toggleFavorite(italian){
+      if(favorites.includes(italian)){
+        favorites = favorites.filter(x => x !== italian);
+      } else {
+        favorites.unshift(italian);
+      }
+      saveFavorites();
+      renderResults(filtered);
+    }
+
+    function addToHistory(query){
+      if(!query || !query.trim()) return;
+      const q = query.trim();
+      history = [q, ...history.filter(x => x !== q)].slice(0,15);
+      saveHistory();
+    }
+
+    function speak(text){
+      if(!("speechSynthesis" in window)){
+        alert("Speech Synthesis در این مرورگر پشتیبانی نمی‌شود.");
+        return;
+      }
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "it-IT";
+      utter.rate = 0.92;
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utter);
+    }
+
+    function renderResults(items){
+      const wrap = document.getElementById("results");
+      document.getElementById("resultCount").textContent = `${items.length} نتیجه`;
+      if(!items.length){
+        wrap.innerHTML = `<div class="empty">هیچ نتیجه‌ای پیدا نشد. عبارت دیگری امتحان کنید.</div>`;
+        return;
+      }
+      wrap.innerHTML = items.map(item => {
+        const fav = favorites.includes(item.italian);
+        return `
+          <article class="word-card">
+            <div class="word-top">
+              <div class="word-main">
+                <div class="italian">${escapeHtml(item.italian)}</div>
+                <div class="pron">${escapeHtml(item.pronunciation)}</div>
+                <div class="persian">${escapeHtml(item.persian)}</div>
+              </div>
+              <div class="chips">
+                <span class="chip">${escapeHtml(categoryLabels[item.category] || item.category)}</span>
+                <span class="chip level">${escapeHtml(item.level)}</span>
+              </div>
+            </div>
+            <div class="example">
+              <div class="it">${escapeHtml(item.example)}</div>
+              <div class="fa">${escapeHtml(item.exampleFa)}</div>
+            </div>
+            <div class="actions">
+              <button class="icon-btn" onclick="speak('${escapeHtml(item.italian)}')">🔊 تلفظ</button>
+              <button class="icon-btn" onclick="toggleFavorite('${escapeHtml(item.italian)}')">${fav ? '★ حذف از علاقه‌مندی' : '☆ افزودن به علاقه‌مندی'}</button>
+              <button class="icon-btn" onclick="loadWordToFlashcard('${escapeHtml(item.italian)}')">🗂 فلش‌کارت</button>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function scoreItem(item, queryNorm, queryRaw){
+      let score = 0;
+      const fa = normalizePersian(item.persian);
+      const aliases = (item.aliases || []).map(normalizePersian).join(" | ");
+      const it = (item.italian || "").toLowerCase();
+      const pr = (item.pronunciation || "").toLowerCase();
+      const ql = (queryRaw || "").trim().toLowerCase();
+
+      if(!queryNorm && !ql) return 1;
+
+      if(it === ql) score += 120;
+      if(fa === queryNorm) score += 110;
+      if(aliases.split(" | ").includes(queryNorm)) score += 100;
+
+      if(it.startsWith(ql)) score += 80;
+      if(fa.startsWith(queryNorm)) score += 75;
+
+      if(it.includes(ql)) score += 45;
+      if(pr.includes(ql)) score += 35;
+      if(fa.includes(queryNorm)) score += 55;
+      if(aliases.includes(queryNorm)) score += 52;
+
+      return score;
+    }
+
+    function performSearch(){
+      const query = document.getElementById("searchInput").value || "";
+      const category = document.getElementById("categoryFilter").value;
+      const level = document.getElementById("levelFilter").value;
+      const queryNorm = normalizePersian(query);
+      const queryRaw = query.toLowerCase().trim();
+
+      addToHistory(query);
+
+      let items = dictionary.filter(item => {
+        const score = scoreItem(item, queryNorm, queryRaw);
+        const categoryMatch = category === "all" || item.category === category;
+        const levelMatch = level === "all" || item.level === level;
+        return score > 0 && categoryMatch && levelMatch;
+      });
+
+      items = items
+        .map(item => ({...item, _score: scoreItem(item, queryNorm, queryRaw)}))
+        .sort((a,b) => b._score - a._score || a.italian.localeCompare(b.italian))
+        .map(({_score, ...rest}) => rest);
+
+      filtered = items;
+      renderResults(filtered);
+    }
+
+    function resetFilters(){
+      document.getElementById("searchInput").value = "";
+      document.getElementById("categoryFilter").value = "all";
+      document.getElementById("levelFilter").value = "all";
+      filtered = [...dictionary];
+      renderResults(filtered);
+    }
+
+    function renderFavorites(){
+      const box = document.getElementById("favoritesList");
+      if(!favorites.length){
+        box.innerHTML = `<div class="empty">هنوز چیزی ذخیره نشده است.</div>`;
+        return;
+      }
+      const items = favorites
+        .map(f => dictionary.find(d => d.italian === f))
+        .filter(Boolean)
+        .slice(0,10);
+
+      box.innerHTML = items.map(item => `
+        <div class="mini-item">
+          <div>
+            <div><strong>${escapeHtml(item.italian)}</strong></div>
+            <small>${escapeHtml(item.persian)}</small>
+          </div>
+          <button class="icon-btn" onclick="speak('${escapeHtml(item.italian)}')">🔊</button>
+        </div>
+      `).join("");
+    }
+
+    function renderHistory(){
+      const box = document.getElementById("historyList");
+      if(!history.length){
+        box.innerHTML = `<div class="empty">تاریخچه‌ای وجود ندارد.</div>`;
+        return;
+      }
+      box.innerHTML = history.slice(0,10).map(q => `
+        <div class="mini-item">
+          <div><strong>${escapeHtml(q)}</strong></div>
+          <button class="icon-btn" onclick="repeatHistorySearch('${escapeHtml(q)}')">↺</button>
+        </div>
+      `).join("");
+    }
+
+    function repeatHistorySearch(q){
+      document.getElementById("searchInput").value = q;
+      performSearch();
+    }
+
+    function updateStats(){
+      document.getElementById("statWords").textContent = dictionary.length;
+      document.getElementById("statFavs").textContent = favorites.length;
+      document.getElementById("statHistory").textContent = history.length;
+    }
+
+    function initCategories(){
+      const select = document.getElementById("categoryFilter");
+      const pills = document.getElementById("categoryPills");
+      const quick = document.getElementById("quickCategories");
+
+      Object.entries(categoryLabels).forEach(([key,label]) => {
+        if(key !== "all"){
+          const option = document.createElement("option");
+          option.value = key;
+          option.textContent = label;
+          select.appendChild(option);
+
+          const pill = document.createElement("button");
+          pill.className = "pill";
+          pill.textContent = label;
+          pill.onclick = () => {
+            document.getElementById("categoryFilter").value = key;
+            highlightActivePill(key);
+            performSearch();
+          };
+          pill.dataset.category = key;
+          pills.appendChild(pill);
+
+          const qp = document.createElement("button");
+          qp.className = "pill";
+          qp.textContent = label;
+          qp.onclick = () => {
+            scrollToSection("dictionarySection");
+            document.getElementById("categoryFilter").value = key;
+            highlightActivePill(key);
+            performSearch();
+          };
+          quick.appendChild(qp);
+        }
+      });
+    }
+
+    function highlightActivePill(category){
+      document.querySelectorAll("#categoryPills .pill").forEach(p => {
+        p.classList.toggle("active", p.dataset.category === category);
+      });
+    }
+
+    function nextFlashcard(){
+      if(!filtered.length) filtered = [...dictionary];
+      flashcardIndex = Math.floor(Math.random() * filtered.length);
+      flashcardFlipped = false;
+      const item = filtered[flashcardIndex];
+      document.getElementById("flashcardFront").textContent = item.italian;
+      document.getElementById("flashcardSub").textContent = item.pronunciation + " • برای دیدن معنی کلیک کنید";
+    }
+
+    function flipFlashcard(){
+      if(!filtered.length) return;
+      const item = filtered[flashcardIndex];
+      flashcardFlipped = !flashcardFlipped;
+      if(flashcardFlipped){
+        document.getElementById("flashcardFront").textContent = item.persian;
+        document.getElementById("flashcardSub").textContent = item.exampleFa;
+      } else {
+        document.getElementById("flashcardFront").textContent = item.italian;
+        document.getElementById("flashcardSub").textContent = item.pronunciation + " • برای دیدن معنی کلیک کنید";
+      }
+    }
+
+    function loadWordToFlashcard(italian){
+      const idx = filtered.findIndex(x => x.italian === italian) >= 0
+        ? filtered.findIndex(x => x.italian === italian)
+        : dictionary.findIndex(x => x.italian === italian);
+      if(idx >= 0){
+        const src = filtered.findIndex(x => x.italian === italian) >= 0 ? filtered : dictionary;
+        flashcardIndex = idx;
+        flashcardFlipped = false;
+        document.getElementById("flashcardFront").textContent = src[idx].italian;
+        document.getElementById("flashcardSub").textContent = src[idx].pronunciation + " • برای دیدن معنی کلیک کنید";
+        scrollToSection("flashcardSection");
+      }
+    }
+
+    function speakCurrentFlashcard(){
+      if(!filtered.length) return;
+      speak(filtered[flashcardIndex].italian);
+    }
+
+    function addCurrentFlashcardToFavorites(){
+      if(!filtered.length) return;
+      toggleFavorite(filtered[flashcardIndex].italian);
+    }
+
+    function shuffle(array){
+      const arr = [...array];
+      for(let i = arr.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function generateQuiz(){
+      const source = filtered.length >= 4 ? filtered : dictionary;
+      const correct = source[Math.floor(Math.random() * source.length)];
+      const others = shuffle(dictionary.filter(x => x.italian !== correct.italian)).slice(0,3);
+      const options = shuffle([correct, ...others]);
+      currentQuiz = { correct, options, answered:false };
+
+      document.getElementById("quizWord").textContent = correct.italian;
+      document.getElementById("quizFeedback").textContent = "";
+      document.getElementById("quizOptions").innerHTML = options.map(opt => `
+        <button class="option" onclick="answerQuiz('${escapeHtml(opt.italian)}', this)">
+          ${escapeHtml(opt.persian)}
+        </button>
+      `).join("");
+    }
+
+    function answerQuiz(selectedItalian, el){
+      if(!currentQuiz || currentQuiz.answered) return;
+      currentQuiz.answered = true;
+      const buttons = [...document.querySelectorAll("#quizOptions .option")];
+      buttons.forEach(btn => {
+        const txt = btn.textContent.trim();
+        const correctFa = currentQuiz.correct.persian;
+        if(txt === correctFa) btn.classList.add("correct");
+      });
+
+      if(selectedItalian === currentQuiz.correct.italian){
+        el.classList.add("correct");
+        document.getElementById("quizFeedback").textContent = "✅ درست بود!";
+      } else {
+        el.classList.add("wrong");
+        document.getElementById("quizFeedback").textContent = `❌ پاسخ درست: ${currentQuiz.correct.persian}`;
+      }
+    }
+
+    function exportFavorites(){
+      const items = favorites
+        .map(f => dictionary.find(d => d.italian === f))
+        .filter(Boolean);
+
+      if(!items.length){
+        alert("هنوز علاقه‌مندی‌ای برای خروجی گرفتن ندارید.");
+        return;
+      }
+
+      const text = items.map((item, i) =>
+`${i+1}. ${item.italian}
+   Persian: ${item.persian}
+   Pronunciation: ${item.pronunciation}
+   Example: ${item.example}
+   Meaning: ${item.exampleFa}
+`).join("\n");
+
+      const blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "italian-favorites.txt";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function scrollToSection(id){
+      document.getElementById(id).scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    document.getElementById("searchInput").addEventListener("keydown", e => {
+      if(e.key === "Enter") performSearch();
+    });
+
+    document.getElementById("categoryFilter").addEventListener("change", e => {
+      highlightActivePill(e.target.value);
+      performSearch();
+    });
+
+    document.getElementById("levelFilter").addEventListener("change", performSearch);
+
+    function init(){
+      initCategories();
+      updateStats();
+      renderFavorites();
+      renderHistory();
+      renderResults(dictionary);
+      nextFlashcard();
+      generateQuiz();
+    }
+
+    init();
+  </script>
+</body>
+</html>
